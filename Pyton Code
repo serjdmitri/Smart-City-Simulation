@@ -1,0 +1,82 @@
+Python Code:
+
+# Traffic and energy data
+traffic_data = [3, 4, 5, 6, 4, 3, 7, 5]
+energy_data = [20, 21, 23, 25, 28, 30, 32, 35]
+
+# Pollution from traffic
+pollution = 0
+pollution_over_time = []
+
+for t in traffic_data:
+    pollution += t
+    pollution_over_time.append(pollution)
+
+# Statistics function (average, min, max)
+def stats(values):
+    avg = sum(values) / len(values)
+    minimum = min(values)
+    maximum = max(values)
+    return avg, minimum, maximum
+
+traffic_avg, traffic_min, traffic_max = stats(traffic_data)
+energy_avg, energy_min, energy_max = stats(energy_data)
+pollution_avg, pollution_min, pollution_max = stats(pollution_over_time)
+
+# Print results
+print("=== TRAFFIC DATA ===")
+print("Traffic list:", traffic_data)
+print("Average:", traffic_avg)
+print("Min:", traffic_min)
+print("Max:", traffic_max)
+print()
+
+print("=== ENERGY DATA ===")
+print("Energy list:", energy_data)
+print("Average:", energy_avg)
+print("Min:", energy_min)
+print("Max:", energy_max)
+print()
+
+print("=== POLLUTION DATA ===")
+print("Pollution list:", pollution_over_time)
+print("Average:", pollution_avg)
+print("Min:", pollution_min)
+print("Max:", pollution_max)
+print()
+
+# City status logic (matches Scratch conditions)
+def city_status(tr, en, pol):
+    if tr > 6:
+        return "High traffic"
+    if pol > 50:
+        return "High pollution"
+    if en > 30:
+        return "High energy use"
+    return "Normal"
+
+print("=== CITY STATUS OVER TIME ===")
+for i in range(len(traffic_data)):
+    print("Time", i, "->", city_status(traffic_data[i], energy_data[i], pollution_over_time[i]))
+
+# -------------------------------
+# Car spawn spacing logic (Python version of the Scratch fix)
+# -------------------------------
+
+print()
+print("=== CAR SPAWN Y-OFFSET FIX (PYTHON MODEL) ===")
+
+# Example list of spawn positions (matching your Scratch spawn zone)
+spawn_y_positions = []
+
+for i in range(8):
+    # Scratch spawns between -100 and -50
+    base_y = -80  
+
+    # NEW FIX: Add a tiny unique offset so they don't overlap
+    offset = (i % 5) - 2   # offsets = -2, -1, 0, 1, 2 repeating
+
+    final_y = base_y + offset
+    spawn_y_positions.append(final_y)
+
+print("Car Y positions with spacing:", spawn_y_positions)
